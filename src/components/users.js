@@ -5,7 +5,6 @@ import List from 'react-virtualized/dist/commonjs/List'
 
 import User from "./user";
 import { getData } from '../redux/actions/data';
-import { DATA_TYPE } from '../redux/constants';
 import { STYLES, LIST_SETTINGS } from "../config";
 
 import 'react-virtualized/styles.css'
@@ -23,13 +22,12 @@ class Users extends PureComponent {
         return (
             <User
                 key={key}
-                user={this.props.users[index]}
+                user={this.props[this.props.dataType][index]}
                 styles={style} />
         );
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="users">
                 <List
@@ -38,16 +36,16 @@ class Users extends PureComponent {
                     rowHeight={STYLES.ITEM_HEIGHT}
                     overscanRowCount={LIST_SETTINGS.OVERSCAN}
                     rowRenderer={this.rowRenderer}
-                    rowCount={this.props.users.length} />
+                    rowCount={this.props[this.props.dataType].length} />
             </div>
         );
     }
 }
 
 Users = connect(
-    (state) => {
+    (state, dataType) => {
         return {
-            [DATA_TYPE[this.props.dataType]]: state[this.props.dataType],
+            [dataType.dataType]: state[dataType.dataType],
         };
     },
     {
