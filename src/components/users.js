@@ -1,15 +1,23 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from 'react-virtualized/dist/commonjs/List'
+
 import User from "./user";
+import { getData } from '../redux/actions/data';
+import { DATA_TYPE } from '../redux/constants';
 import { STYLES, LIST_SETTINGS } from "../config";
 
 import 'react-virtualized/styles.css'
 
 class Users extends PureComponent {
     static propTypes = {
-        users: PropTypes.arrayOf(PropTypes.object).isRequired,
+        dataType: PropTypes.string.isRequired,
     };
+
+    componentWillMount() {
+        this.props.getData(this.props.dataType);
+    }
 
     rowRenderer = ({key, index, isScrolling, style}) => {
         return (
@@ -21,6 +29,7 @@ class Users extends PureComponent {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="users">
                 <List
@@ -34,5 +43,16 @@ class Users extends PureComponent {
         );
     }
 }
+
+Users = connect(
+    (state) => {
+        return {
+            [DATA_TYPE[this.props.dataType]]: state[this.props.dataType],
+        };
+    },
+    {
+        getData
+    }
+)(Users);
 
 export default Users;
