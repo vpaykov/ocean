@@ -6,4 +6,6 @@ export const STYLES = {
 
 export const LIST_SETTINGS = {
     OVERSCAN: 10,
+    START_INDEX: 0,
+    STOP_INDEX: 25,
 };

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import List from 'react-virtualized/dist/commonjs/List'
+import { InfiniteLoader, List } from 'react-virtualized';
 
 import User from "./user";
 import { getData } from '../redux/actions/data';
@@ -15,7 +15,13 @@ class Users extends PureComponent {
     };
 
     componentWillMount() {
-        this.props.getData(this.props.dataType);
+        this.props.getData(this.props.dataType, LIST_SETTINGS.START_INDEX, LIST_SETTINGS.STOP_INDEX);
+    }
+
+    isRowLoaded = ({ index }) => !!this.props[this.props.dataType][index];
+
+    loadMoreRows = ({ startIndex, stopIndex }) => {
+        this.props.getData(this.props.dataType, startIndex, stopIndex);
     }
 
     rowRenderer = ({key, index, isScrolling, style}) => {
@@ -28,17 +34,25 @@ class Users extends PureComponent {
     }
 
     render() {
-        return (
-            <div className="users">
-                <List
-                    width={STYLES.PARENT_WIDTH}
-                    height={STYLES.PARENT_HEIGHT}
-                    rowHeight={STYLES.ITEM_HEIGHT}
-                    overscanRowCount={LIST_SETTINGS.OVERSCAN}
-                    rowRenderer={this.rowRenderer}
-                    rowCount={this.props[this.props.dataType].length} />
-            </div>
-        );
+        if (this.props[this.props.dataType].length) {
+            return (
+                <div className="users">
+                    <List
+                        width={STYLES.PARENT_WIDTH}
+                        height={STYLES.PARENT_HEIGHT}
+                        rowHeight={STYLES.ITEM_HEIGHT}
+                        overscanRowCount={LIST_SETTINGS.OVERSCAN}
+                        rowRenderer={this.rowRenderer}
+                        rowCount={this.props[this.props.dataType].length} />
+                </div>
+            );
+        } else {
+            return (
+                <div className="users">
+                    <span className="loading">loading...</span>
+                </div>
+            );
+        }
     }
 }
 
