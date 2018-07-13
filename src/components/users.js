@@ -43,9 +43,9 @@ class Users extends PureComponent {
 }
 
 Users = connect(
-    (state, dataType) => {
+    (state, props) => {
         return {
-            [dataType.dataType]: state[dataType.dataType],
+            [props.dataType]: state[props.dataType],
         };
     },
     {
