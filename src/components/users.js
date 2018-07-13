@@ -37,13 +37,22 @@ class Users extends PureComponent {
         if (this.props[this.props.dataType].length) {
             return (
                 <div className="users">
-                    <List
-                        width={STYLES.PARENT_WIDTH}
-                        height={STYLES.PARENT_HEIGHT}
-                        rowHeight={STYLES.ITEM_HEIGHT}
-                        overscanRowCount={LIST_SETTINGS.OVERSCAN}
-                        rowRenderer={this.rowRenderer}
-                        rowCount={this.props[this.props.dataType].length} />
+                    <InfiniteLoader
+                        isRowLoaded={this.isRowLoaded}
+                        loadMoreRows={this.loadMoreRows}
+                        rowCount={LIST_SETTINGS.REMOTE_AMOUNT} >
+                            {({ onRowsRendered, registerChild }) => (
+                                <List
+                                    onRowsRendered={onRowsRendered}
+                                    ref={registerChild}
+                                    width={STYLES.PARENT_WIDTH}
+                                    height={STYLES.PARENT_HEIGHT}
+                                    rowHeight={STYLES.ITEM_HEIGHT}
+                                    overscanRowCount={LIST_SETTINGS.OVERSCAN}
+                                    rowRenderer={this.rowRenderer}
+                                    rowCount={this.props[this.props.dataType].length} />
+                            )}
+                    </InfiniteLoader>
                 </div>
             );
         } else {

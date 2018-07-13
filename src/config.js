@@ -8,4 +8,6 @@ export const LIST_SETTINGS = {
     OVERSCAN: 10,
     START_INDEX: 0,
     STOP_INDEX: 25,
+    // I cant understand how to get this data :(
+    REMOTE_AMOUNT: 10000,
 };
