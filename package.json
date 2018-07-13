@@ -1,0 +1,30 @@
+{
+  "name": "fechallenge",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "flow-typed": "^2.5.1",
+    "lodash": "^4.17.10",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "react-virtualized": "^9.20.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start:mockapi": "json-server --watch db/db.json --port 3001",
+    "start:dev": "react-scripts start",
+    "start": "npm-run-all --parallel start:dev start:mockapi",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "chalk": "^2.3.2",
+    "json-server": "^0.12.1",
+    "npm-run-all": "^4.1.2"
+  }
+}
