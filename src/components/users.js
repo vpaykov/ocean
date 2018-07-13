@@ -7,7 +7,7 @@ import User from "./user";
 import { getData } from '../redux/actions/data';
 import { STYLES, LIST_SETTINGS } from "../config";
 
-import 'react-virtualized/styles.css'
+import 'react-virtualized/styles.css';
 
 class Users extends PureComponent {
     static propTypes = {
