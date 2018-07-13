@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-import reducers from "./reducers";
+import reducer from "./reducers/data";
 
 const middleware = applyMiddleware(thunk);
 
-export default createStore(reducers, middleware);
+export default createStore(reducer, middleware);

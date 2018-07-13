@@ -7,8 +7,8 @@ import { DATA_TYPE } from './redux/constants';
 
 class App extends PureComponent {
     componentWillMount() {
-        this.props.getData(DATA_TYPE.USERS);
-        this.props.getData(DATA_TYPE.REVIEWERS);
+        this.props.getData(DATA_TYPE.users);
+        this.props.getData(DATA_TYPE.reviewers);
     }
 
     render() {
@@ -38,8 +38,8 @@ class App extends PureComponent {
 App = connect(
     (state) => {
         return {
-            users: state.users.users,
-            reviewers: state.reviewers.reviewers,
+            [DATA_TYPE.users]: state.users,
+            [DATA_TYPE.reviewers]: state.reviewers,
         };
     },
     {
