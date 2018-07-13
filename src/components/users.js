@@ -14,7 +14,7 @@ class Users extends PureComponent {
         dataType: PropTypes.string.isRequired,
     };
 
-    componentWillMount() {
+    componentWillMount = () => {
         this.props.getData(this.props.dataType, LIST_SETTINGS.START_INDEX, LIST_SETTINGS.STOP_INDEX);
     }
 
